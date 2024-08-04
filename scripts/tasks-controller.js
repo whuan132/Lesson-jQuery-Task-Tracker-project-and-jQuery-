@@ -26,28 +26,6 @@ tasksController = (function () {
     });
   }
 
-  // Modifying the toObject method
-  (function ($) {
-    $.fn.extend({
-      toObject: function () {
-        return this.serializeArray().reduce((result, { name, value }) => {
-          result[name] = value;
-          return result;
-        }, {});
-      },
-      fromObject: function (obj) {
-        $.each(this.find(":input"), function (i, v) {
-          var name = $(v).attr("name");
-          if (obj[name]) {
-            $(v).val(obj[name]);
-          } else {
-            $(v).val("");
-          }
-        });
-      },
-    });
-  })(jQuery);
-
   function loadFromCSV(event) {
     var reader = new FileReader();
     reader.onload = function (evt) {

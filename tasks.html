@@ -113,11 +113,17 @@
     (function ($) {
         $.fn.extend({
             toObject: function () {
-                var result = {};
-                $.each(this.serializeArray(), function (i, v) {
-                    result[v.name] = v.value;
-                });
-                return result;
+                // var result = {};
+                // $.each(this.serializeArray(), function (i, v) {
+                //     result[v.name] = v.value;
+                // });
+                // return result;
+                return this.find(":input")
+                    .get()
+                    .reduce(function (obj, field) {
+                        obj[field.name] = $(field).val();
+                        return obj;
+                    }, {});
             },
             fromObject: function (obj) {
                 $.each(this.find(':input'), function (i, v) {
